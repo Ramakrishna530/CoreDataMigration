@@ -63,7 +63,7 @@
                     <navigationItem key="navigationItem" id="Yay-fF-imv">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="aMT-4i-hqE">
                             <connections>
-                                <segue destination="SeU-x5-Xb5" kind="presentation" identifier="createEditEmployeeSegue" modalPresentationStyle="fullScreen" id="pa3-uL-DjH"/>
+                                <action selector="addBtnAction:" destination="BYZ-38-t0r" id="ziV-LU-zgM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -78,13 +78,13 @@
         <!--Create Edit Employee View Controller-->
         <scene sceneID="6G6-eq-LjV">
             <objects>
-                <viewController id="oA0-Mo-h3E" customClass="CreateEditEmployeeViewController" customModule="CoreDataMigration" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEditEmployeeViewController" id="oA0-Mo-h3E" customClass="CreateEditEmployeeViewController" customModule="CoreDataMigration" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZzJ-Pc-WGs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U6y-xX-Yqe">
-                                <rect key="frame" x="10" y="108" width="394" height="210"/>
+                                <rect key="frame" x="10" y="64" width="394" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hO5-Jn-U8A">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="34"/>
@@ -153,6 +153,7 @@
         <!--Navigation Controller-->
         <scene sceneID="YIg-EO-g0u">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BOc-G3-zSs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bxa-F6-Y2t" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HtL-4y-hyo">
@@ -166,28 +167,8 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qn3-7J-Nn6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BOc-G3-zSs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="97.767857142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2zL-Ud-djE">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SeU-x5-Xb5" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZIw-6F-dG5">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="oA0-Mo-h3E" kind="relationship" relationship="rootViewController" id="nub-hh-Vcr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tru-io-sAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1757.9710144927537" y="97.767857142857139"/>
         </scene>
     </scenes>
     <resources>

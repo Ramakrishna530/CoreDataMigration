@@ -24,13 +24,13 @@ class EmployeesViewController: UIViewController {
         self.title = "Employees"
         self.employees = dataUtility.getEmployees()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.employees = dataUtility.getEmployees()
         self.tableView.reloadData()
     }
-
+    
 }
 
 extension EmployeesViewController: UITableViewDataSource {
@@ -56,23 +56,55 @@ extension EmployeesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Archive action
+        let updateAction = UIContextualAction(style: .normal,
+                                              title: "Update") {(action, view, completionHandler) in
+            let employee = self.employees[indexPath.row]
+            self.updateEmployee(employee)
+            completionHandler(true)
+        }
+        updateAction.backgroundColor = .systemGreen
+        
+        // Trash action
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: "Delete") {(action, view, completionHandler) in
+            self.deleteEmployee(at: indexPath)
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, updateAction])
+        
+        return configuration
+    }
+    
+    func updateEmployee(_ employee: Employee) {
+        presentCreateEditEmployeeViewController(emp: employee)
+    }
+    
+    func deleteEmployee(at indextPath: IndexPath) {
+        let employee = self.employees[indextPath.row]
+        dataUtility.deleteEmployee(employeeID: employee.id)
+        employees.remove(at: indextPath.row)
+        tableView.reloadData()
+    }
 }
 
 extension EmployeesViewController {
-    @IBAction func addButtonAction(_ sender: UIBarButtonItem) {
-        let empID = UUID().uuidString
-        let organisationID = "1"
-        let name = "Emp - \(employees.count+1)"
-        let age: Int64 = Int64.random(in: 20...60)
-        let salary: Int64 = Int64.random(in: 50000...500000)
-        let employee = Employee(id: empID,
-                                name: name,
-                                age: age,
-                                salary: salary,
-                                organisationID: organisationID)
-        dataUtility.insertEmployee(employee)
-        dataUtility.save()
-        employees.append(employee)
-        tableView.reloadData()
+    
+    @IBAction func addBtnAction(_ sender: UIBarButtonItem) {
+        presentCreateEditEmployeeViewController(emp: nil)
+    }
+    func presentCreateEditEmployeeViewController(emp: Employee?) {
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "CreateEditEmployeeViewController") as! CreateEditEmployeeViewController
+        viewController.employeeToUpdate = emp
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.barTintColor = UIColor.orange
+        navigationController.navigationBar.backgroundColor = UIColor.orange
+        navigationController.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        self.present(navigationController, animated: true, completion: nil)
     }
 }

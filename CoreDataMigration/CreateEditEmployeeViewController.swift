@@ -20,8 +20,29 @@ class CreateEditEmployeeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addCancelButton()
+        updateUIIfRequired()
         self.title = "Add Employee"
         // Do any additional setup after loading the view.
+    }
+    
+    func addCancelButton() {
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain,
+                                         target: self, action: #selector(cancelBtnAction))
+        self.navigationItem.setLeftBarButton(cancelButton, animated: true)
+    }
+    
+    @objc func cancelBtnAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateUIIfRequired() {
+        if let employeeToUpdate = employeeToUpdate {
+            self.nameTF.text = employeeToUpdate.name
+            self.ageTF.text = "\(employeeToUpdate.age)"
+            self.salaryTF.text = "\(employeeToUpdate.salary)"
+            self.organisationTF.text = employeeToUpdate.organisationID
+        }
     }
     
     @IBAction func saveBtnAction(_ sender: UIButton) {
