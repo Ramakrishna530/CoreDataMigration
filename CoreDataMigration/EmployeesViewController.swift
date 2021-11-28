@@ -20,6 +20,9 @@ class EmployeesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        print(documentsURL)
         super.viewDidLoad()
         self.title = "Employees"
         self.employees = dataUtility.getEmployees()
