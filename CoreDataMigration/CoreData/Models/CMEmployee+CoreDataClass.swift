@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreData
+import CoreData 
 
 @objc(CMEmployee)
 public class CMEmployee: NSManagedObject {
